@@ -14,17 +14,20 @@ import pkg2dgamesframework.Objects;
  */
 public class Chimney extends Objects{
     
+    private boolean isAlive=true;
+    
     private Rectangle rect;
     
     private boolean isBehindBird = false;
     
     public Chimney(int x, int y, int w, int h){
         super(x,y,w,h);
-        rect = new Rectangle(x,y,w,h);
+        rect = new Rectangle(x,y,30,30);
     }
     
     public void update(){
-            setPosX(getPosX()-2);
+        if(getPosY()>1000) setLive(false);
+        setPosY(getPosY()+2);
         rect.setLocation((int)this.getPosX(),(int) this.getPosY());
     }
     
@@ -40,4 +43,12 @@ public class Chimney extends Objects{
         return isBehindBird;
     }
 
+    public boolean getAlive() {
+        return isAlive;
+    }
+    
+    public void setLive(boolean b){
+        isAlive = b;
+    }
+    
 }
