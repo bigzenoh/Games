@@ -31,7 +31,7 @@ public class FirstGame extends GameScreen{
     private int CurrentScreen = BEGIN_SCREEN;
     
     public FirstGame() {
-        super(800,600);
+        super(1000,1000);
         
         bird = new Bird();
         //xong may bay
@@ -49,7 +49,7 @@ public class FirstGame extends GameScreen{
     }
     
     private void resetGame(){
-        bird.setPos(200,250);
+        bird.setPos(470,800);
         bird.setVt(0);
         bird.setLive(true);
         chimneyGroup.reset();
@@ -71,21 +71,20 @@ public class FirstGame extends GameScreen{
             chimneyGroup.update();
             
             for(int i=0;i<chimneyGroup.SIZE;i++){
-                if(bird.getAlive()==true)System.out.println("still Alive");
-                else System.out.println("DEAD");
+//                if(bird.getAlive()==true)System.out.println("still Alive");
+//                else System.out.println("DEAD");
                 if(bird.getRect().intersects(chimneyGroup.getChimney(i).getRect())){
                     bird.setLive(false);
                     System.out.println("set Alive False");
                 }
-                if(bird.getY()+bird.getH()>=ground.getY())
-                    bird.setLive(false);
+                
                     
             }
             
             for(int i=0;i<chimneyGroup.SIZE;i++){
-                if(bird.getX()-36>chimneyGroup.getChimney(i).getPosX() && !chimneyGroup.getChimney(i).getIsBehindBird() && i%2==0){
+                if(chimneyGroup.getChimney(i).getIsBehindBird()==true){
                     point++;
-                    chimneyGroup.getChimney(i).setIsBehindBird(true);
+                    chimneyGroup.getChimney(i).setIsBehindBird(false);
                     
             }
             }
@@ -98,9 +97,9 @@ public class FirstGame extends GameScreen{
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////PAINT//
     @Override
     public void GAME_PAINT(Graphics2D g2) {
- 
-        chimneyGroup.paint(g2);
+        
         ground.Paint(g2);
+        chimneyGroup.paint(g2);
         bird.paint(g2);   
         
         if(CurrentScreen == BEGIN_SCREEN) {

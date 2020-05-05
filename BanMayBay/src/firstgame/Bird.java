@@ -27,6 +27,7 @@ public class Bird extends Objects{
     private BufferedImage birds;
     Animation bird_anim;
     
+    
     private float vt = 0;
     private float horizon_left = 0, horizon_right =0;
     private float vertical_up = 0, vertical_down = 0;
@@ -37,16 +38,16 @@ public class Bird extends Objects{
     
     public Bird(){
           
-        x = 200;
-        y = 250;
+        x = 0;
+        y = 0;
         w = 50;
         h = 50;
         
-        rect = new Rectangle(x,y,w,h);
+        rect = new Rectangle(x,y,50,50);
         
         
         try {
-            birds = ImageIO.read(new File("Assets/bird_sprite.png"));
+            birds = ImageIO.read(new File("Assets/plane.png"));
         } catch (IOException ex) {} 
         //khoi tao hieu ung chuyen dong cua may bay
         bird_anim = new Animation(70);
@@ -66,7 +67,7 @@ public class Bird extends Objects{
         isAlive = b;
     }
     public boolean getAlive(){
-        if(isAlive==true)System.out.println("still Alive");
+//        if(isAlive==true)System.out.println("still Alive");
         return isAlive;
     }
     
@@ -97,14 +98,12 @@ public class Bird extends Objects{
         
         if(isAlive) bird_anim.Update_Me(deltaTime);
         vt+=g;
-//        horizon=0;
-//        vertical=0;
+
         
-//        y+=vt;  //toc do roi
-          y+=vertical_up;
-          y+=vertical_down;
-          x+=horizon_left;
-          x+=horizon_right;
+          if(y>0) y+=vertical_up;
+          if(y<940) y+=vertical_down;
+          if(x>0) x+=horizon_left;
+          if(x<940)x+=horizon_right;
         if(!isAlive) x-=2;
         this.rect.setLocation(this.x, this.y);
     } 
@@ -113,25 +112,25 @@ public class Bird extends Objects{
 //        vt=-5;
 //    }
     public void turnLeft(){
-        horizon_left=-4;
+        horizon_left=-5;
     }
     public void notTurnLeft(){
         horizon_left=0;
     }
     public void turnRight(){
-        horizon_right=3;
+        horizon_right=5;
     }
     public void notTurnRight(){
         horizon_right=0;
     }
     public void turnUp(){
-        vertical_up=-3;
+        vertical_up=-5;
     }
     public void notTurnUp(){
         vertical_up=0;
     }
     public void turnDown(){
-        vertical_down=3;
+        vertical_down=5;
     }
     public void notTurnDown(){
         vertical_down=0;
@@ -142,19 +141,15 @@ public class Bird extends Objects{
     public float getH() {
     return h;
     }
-    public int getFlying(){
-
-          return (int) vt;
-    }
     
     public void paint(Graphics2D g2){
         
-        if(vertical_up<0)
-            bird_anim.PaintAnims(x, y, birds, g2, 0, (float) -0.5);
-        else if(vertical_up==0 && vertical_down==0)
+        if(horizon_left<0)
+            bird_anim.PaintAnims(x, y, birds, g2, 0, (float) -0.4);
+        else if(horizon_left==0 && horizon_right==0)
             bird_anim.PaintAnims(x, y, birds, g2, 0, 0);
-        else if(vertical_down>0)
-            bird_anim.PaintAnims(x, y, birds, g2, 0, 1);
+        else if(horizon_right>0)
+            bird_anim.PaintAnims(x, y, birds, g2, 0, (float)0.4);
     }
     
 }
