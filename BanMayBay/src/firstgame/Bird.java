@@ -28,13 +28,14 @@ public class Bird extends Objects{
     Animation bird_anim;
     
     private float vt = 0;
+    private float horizon_left = 0, horizon_right =0;
+    private float vertical_up = 0, vertical_down = 0;
     
     private Rectangle rect;
     private boolean isAlive = true;
     
     
     public Bird(){
-//        super(x,y,w,h);
           
         x = 200;
         y = 250;
@@ -72,7 +73,7 @@ public class Bird extends Objects{
     public Rectangle getRect(){
         return rect;
     }
-//    Bird bird = new Bird(200,250,50,50);
+
 
     public int getX() {
         return x;
@@ -91,17 +92,49 @@ public class Bird extends Objects{
     }
     
     public  void update(long deltaTime){
-        if(isAlive) bird_anim.Update_Me(deltaTime);
-        vt+=FirstGame.g;
         
-        y+=vt;  //toc do roi
+        float g = 0.3f; //gia toc  roi
+        
+        if(isAlive) bird_anim.Update_Me(deltaTime);
+        vt+=g;
+//        horizon=0;
+//        vertical=0;
+        
+//        y+=vt;  //toc do roi
+          y+=vertical_up;
+          y+=vertical_down;
+          x+=horizon_left;
+          x+=horizon_right;
         if(!isAlive) x-=2;
         this.rect.setLocation(this.x, this.y);
     } 
     
-    public void fly(){
-        
-        vt=-5;
+//    public void fly(){
+//        vt=-5;
+//    }
+    public void turnLeft(){
+        horizon_left=-4;
+    }
+    public void notTurnLeft(){
+        horizon_left=0;
+    }
+    public void turnRight(){
+        horizon_right=3;
+    }
+    public void notTurnRight(){
+        horizon_right=0;
+    }
+    public void turnUp(){
+        vertical_up=-3;
+    }
+    public void notTurnUp(){
+        vertical_up=0;
+    }
+    public void turnDown(){
+        vertical_down=3;
+    }
+    public void notTurnDown(){
+        vertical_down=0;
     }
 
     
@@ -110,17 +143,17 @@ public class Bird extends Objects{
     return h;
     }
     public int getFlying(){
-//        return isFlying;
+
           return (int) vt;
     }
     
     public void paint(Graphics2D g2){
         
-        if(vt<0)
+        if(vertical_up<0)
             bird_anim.PaintAnims(x, y, birds, g2, 0, (float) -0.5);
-        else if(vt==0)
+        else if(vertical_up==0 && vertical_down==0)
             bird_anim.PaintAnims(x, y, birds, g2, 0, 0);
-        else 
+        else if(vertical_down>0)
             bird_anim.PaintAnims(x, y, birds, g2, 0, 1);
     }
     
