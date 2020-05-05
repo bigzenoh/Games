@@ -71,8 +71,6 @@ public class FirstGame extends GameScreen{
             chimneyGroup.update();
             
             for(int i=0;i<chimneyGroup.SIZE;i++){
-//                if(bird.getAlive()==true)System.out.println("still Alive");
-//                else System.out.println("DEAD");
                 if(bird.getRect().intersects(chimneyGroup.getChimney(i).getRect())){
                     bird.setLive(false);
                     System.out.println("set Alive False");

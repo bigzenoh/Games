@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author phamn
+ * @author DonQuixote
  */
 public class GameThread extends JPanel implements Runnable{
     

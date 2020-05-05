@@ -67,7 +67,6 @@ public class Bird extends Objects{
         isAlive = b;
     }
     public boolean getAlive(){
-//        if(isAlive==true)System.out.println("still Alive");
         return isAlive;
     }
     

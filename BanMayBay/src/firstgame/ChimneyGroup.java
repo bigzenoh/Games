@@ -50,13 +50,13 @@ public class ChimneyGroup {
         Chimney cn;
         for (int i = 0; i < SIZE / 4; i++) {
 
-            cn = new Chimney(generator.nextInt(1000),generator.nextInt(2000)-2000, 50, 50);
+            cn = new Chimney(generator.nextInt(1000),generator.nextInt(1950)-2000, 50, 50);
             chimneys.push(cn);
-            cn = new Chimney(generator.nextInt(1000), generator.nextInt(2000)-2000, 50, 50);
+            cn = new Chimney(generator.nextInt(1000), generator.nextInt(1950)-2000, 50, 50);
             chimneys.push(cn);
-            cn = new Chimney(generator.nextInt(1000), generator.nextInt(2000)-2000, 50, 50);
+            cn = new Chimney(generator.nextInt(1000), generator.nextInt(1950)-2000, 50, 50);
             chimneys.push(cn);
-            cn = new Chimney(generator.nextInt(1000),generator.nextInt(2000)-2000, 50, 50);
+            cn = new Chimney(generator.nextInt(1000),generator.nextInt(1950)-2000, 50, 50);
             chimneys.push(cn);
         }
         
@@ -70,14 +70,10 @@ public class ChimneyGroup {
         for(int i=0;i<SIZE;i++)
             if (chimneys.get(i).getAlive()==false) {
 
-//            Chimney cn;
-//            
-//            cn = chimneys.pop();
             chimneys.get(i).setPosX(generator.nextInt(1000));
             chimneys.get(i).setPosY(generator.nextInt(1000)-1000);
             chimneys.get(i).setLive(true);
             chimneys.get(i).setIsBehindBird(true);
-//            chimneys.push(cn);
 
         }
 
@@ -91,8 +87,6 @@ public class ChimneyGroup {
         for (int i = 0; i < SIZE; i++) {
             
                 g2.drawImage(chimneyImage, (int)chimneys.get(i).getPosX(),(int) chimneys.get(i).getPosY(), null);
-//            g2.setColor(Color.red);
-//            g2.fillRect((int) chimneys.get(i).getPosX(), (int) chimneys.get(i).getPosY(), 50, 50);
         }
     }
 
@@ -101,16 +95,16 @@ public class ChimneyGroup {
         for (int i = 0; i < SIZE / 4; i++) {
 
             chimneys.pop();
-            cn = new Chimney(generator.nextInt(1000),generator.nextInt(2000)-2000, 50, 50);
+            cn = new Chimney(generator.nextInt()+50,generator.nextInt(1950)-2000, 50, 50);
             chimneys.push(cn);
             chimneys.pop();
-            cn = new Chimney(generator.nextInt(1000), generator.nextInt(2000)-2000, 50, 50);
+            cn = new Chimney(generator.nextInt(1000), generator.nextInt(1950)-2000, 50, 50);
             chimneys.push(cn);
             chimneys.pop();
-            cn = new Chimney(generator.nextInt(1000), generator.nextInt(2000)-2000, 50, 50);
+            cn = new Chimney(generator.nextInt(1000), generator.nextInt(1950)-2000, 50, 50);
             chimneys.push(cn);
             chimneys.pop();
-            cn = new Chimney(generator.nextInt(1000),generator.nextInt(2000)-2000, 50, 50);
+            cn = new Chimney(generator.nextInt(1000),generator.nextInt(1950)-2000, 50, 50);
             chimneys.push(cn);
         }
 
