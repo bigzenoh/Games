@@ -13,7 +13,7 @@ import javax.sound.sampled.Clip;
 
 /**
  *
- * @author phamn
+ * @author DonQuixote
  */
 public class SoundPlayer {
     

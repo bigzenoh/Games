@@ -6,7 +6,6 @@
 package firstgame;
 
 import java.awt.Rectangle;
-import java.util.Random;
 import pkg2dgamesframework.Objects;
 
 /**
@@ -15,7 +14,6 @@ import pkg2dgamesframework.Objects;
  */
 public class Chimney extends Objects{
     
-    Random generator = new Random();
     
     private boolean isAlive=true;
     
@@ -42,8 +40,7 @@ public class Chimney extends Objects{
     
     public void update(int traject){
         if(getPosY()>1000 || getPosX()<0 || getPosX()>1000) setLive(false);
-        int generate = generator.nextInt(3);
-        System.out.println(generate);
+        
         if(traject == 0){
             traject1();
         } else if (traject==1){
@@ -52,7 +49,6 @@ public class Chimney extends Objects{
             traject3();
         }
             
-//        setPosY(getPosY()+2);
         rect.setLocation((int)this.getPosX(),(int) this.getPosY());
     }
     

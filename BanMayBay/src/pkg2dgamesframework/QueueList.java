@@ -7,7 +7,7 @@ package pkg2dgamesframework;
 
 /**
  *
- * @author phamn
+ * @author DonQuixote
  */
 public class QueueList <T> {
     

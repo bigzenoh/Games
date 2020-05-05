@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author phamn
+ * @author DonQuixote
  */
 public class AFrameOnImage {
     
