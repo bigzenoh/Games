@@ -6,6 +6,7 @@
 package firstgame;
 
 import java.awt.Rectangle;
+import java.util.Random;
 import pkg2dgamesframework.Objects;
 
 /**
@@ -13,6 +14,8 @@ import pkg2dgamesframework.Objects;
  * @author DonQuixote
  */
 public class Chimney extends Objects{
+    
+    Random generator = new Random();
     
     private boolean isAlive=true;
     
@@ -25,9 +28,31 @@ public class Chimney extends Objects{
         rect = new Rectangle(x,y,30,30);
     }
     
-    public void update(){
-        if(getPosY()>1000) setLive(false);
+    public void traject1(){
         setPosY(getPosY()+2);
+    }
+    public void traject2(){
+        setPosY(getPosY()+3);
+        setPosX(getPosX()+1);
+    }
+    public void traject3(){
+        setPosY(getPosY()+3);
+        setPosX(getPosX()-1);
+    }
+    
+    public void update(int traject){
+        if(getPosY()>1000 || getPosX()<0 || getPosX()>1000) setLive(false);
+        int generate = generator.nextInt(3);
+        System.out.println(generate);
+        if(traject == 0){
+            traject1();
+        } else if (traject==1){
+            traject2();
+        }else if(traject==2){
+            traject3();
+        }
+            
+//        setPosY(getPosY()+2);
         rect.setLocation((int)this.getPosX(),(int) this.getPosY());
     }
     

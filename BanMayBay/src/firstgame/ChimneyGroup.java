@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,12 +30,15 @@ public class ChimneyGroup {
     private BufferedImage chimneyImage, chimneyImage2;
 
     public static int SIZE = 60;
-
+    
+    int[] trajects = new int[SIZE];
+    
     public Chimney getChimney(int i) {
         return chimneys.get(i);
     }
 
     public ChimneyGroup() {
+        
         chimneys = new QueueList<Chimney>();
 
         try {
@@ -55,6 +59,11 @@ public class ChimneyGroup {
             cn = new Chimney(generator.nextInt(1000),generator.nextInt(2000)-2000, 50, 50);
             chimneys.push(cn);
         }
+        
+        for(int i=0;i<SIZE;i++){
+            trajects[i]=generator.nextInt(3);
+        }
+        
     }
 
     public void update() {
@@ -73,7 +82,7 @@ public class ChimneyGroup {
         }
 
         for (int i = 0; i < SIZE; i++) {
-            chimneys.get(i).update();
+            chimneys.get(i).update(trajects[i]);
         }
 
     }
