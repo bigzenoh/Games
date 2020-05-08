@@ -5,15 +5,11 @@
  */
 package firstgame;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import pkg2dgamesframework.QueueList;
 
@@ -25,7 +21,7 @@ public class ChimneyGroup {
     
         Random generator = new Random();
 
-    private QueueList<Chimney> chimneys;
+    private static QueueList<Chimney> chimneys;
 
     private BufferedImage chimneyImage, chimneyImage2;
 
@@ -33,7 +29,7 @@ public class ChimneyGroup {
     
     int[] trajects = new int[SIZE];
     
-    public Chimney getChimney(int i) {
+    public static Chimney getChimney(int i) {
         return chimneys.get(i);
     }
 
@@ -44,8 +40,7 @@ public class ChimneyGroup {
         try {
             chimneyImage = ImageIO.read(new File("Assets/enemyplane.png"));
             chimneyImage2 = ImageIO.read(new File("Assets/chimney2.png"));
-        } catch (IOException ex) {
-        }
+        } catch (IOException ex) {}
 
         Chimney cn;
         for (int i = 0; i < SIZE / 4; i++) {
@@ -85,7 +80,7 @@ public class ChimneyGroup {
 
     public void paint(Graphics2D g2) {
         for (int i = 0; i < SIZE; i++) {
-            
+            if(chimneys.get(i).getAlive()==true)
                 g2.drawImage(chimneyImage, (int)chimneys.get(i).getPosX(),(int) chimneys.get(i).getPosY(), null);
         }
     }

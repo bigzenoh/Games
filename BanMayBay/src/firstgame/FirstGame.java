@@ -8,6 +8,8 @@ package firstgame;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pkg2dgamesframework.GameScreen;
 
 /**
@@ -21,6 +23,7 @@ public class FirstGame extends GameScreen{
     private Bird bird;
     private Ground ground;
     private ChimneyGroup chimneyGroup ;
+    private GroupBullet bulletGroup;
     
     private int point = 0;
     
@@ -39,6 +42,8 @@ public class FirstGame extends GameScreen{
         
         chimneyGroup = new ChimneyGroup();
         
+//        bulletGroup = new Bullet(bird.getX(),bird.getY(),2,2);
+        bulletGroup = new GroupBullet();
         
         BeginGame();
     }
@@ -67,17 +72,24 @@ public class FirstGame extends GameScreen{
             bird.update(deltaTime);
             
             ground.Update();   
-            
+            bulletGroup.update();
             chimneyGroup.update();
             
+            
             for(int i=0;i<chimneyGroup.SIZE;i++){
+                
                 if(bird.getRect().intersects(chimneyGroup.getChimney(i).getRect())){
                     bird.setLive(false);
+                    chimneyGroup.getChimney(i).setLive(false);
                     System.out.println("set Alive False");
                 }
+//                for(int j=0;j<bulletGroup.getSize();j++)
+//                    if(chimneyGroup.getChimney(i).getRect().intersects(bulletGroup.getBullet(j).getRect()))
+//                        chimneyGroup.getChimney(i).setLive(false);
                 
                     
             }
+            
             
             for(int i=0;i<chimneyGroup.SIZE;i++){
                 if(chimneyGroup.getChimney(i).getIsBehindBird()==true){
@@ -99,6 +111,7 @@ public class FirstGame extends GameScreen{
         ground.Paint(g2);
         chimneyGroup.paint(g2);
         bird.paint(g2);   
+        bulletGroup.paint(g2);
         
         if(CurrentScreen == BEGIN_SCREEN) {
             g2.setColor(Color.red);
@@ -124,6 +137,12 @@ public class FirstGame extends GameScreen{
             } else if(CurrentScreen == GAMEOVER_SCREEN)
                 CurrentScreen = BEGIN_SCREEN;
         }
+        
+//        if(Event == KEY_PRESSED && e.getKeyCode()==KeyEvent.VK_J){
+//            
+//        }
+        
+        
         if(e.getKeyCode() == KeyEvent.VK_A && Event == KEY_PRESSED){
                 if(bird.getAlive()) bird.turnLeft();
         } else if(e.getKeyCode() == KeyEvent.VK_A && Event == KEY_RELEASED) bird.notTurnLeft();

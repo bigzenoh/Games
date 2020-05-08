@@ -23,7 +23,7 @@ import pkg2dgamesframework.Objects;
  */
 public class Bird extends Objects{
     
-    private int x, y, w, h;
+    private static int x, y, w, h;
     private BufferedImage birds;
     Animation bird_anim;
     
@@ -31,6 +31,9 @@ public class Bird extends Objects{
     private float vt = 0;
     private float horizon_left = 0, horizon_right =0;
     private float vertical_up = 0, vertical_down = 0;
+    private boolean turn_left = false, turn_right = false; //de xac dinh huong dan bay
+
+    
     
     private Rectangle rect;
     private boolean isAlive = true;
@@ -38,8 +41,8 @@ public class Bird extends Objects{
     
     public Bird(){
           
-        x = 0;
-        y = 0;
+        x = 470;
+        y = 800;
         w = 50;
         h = 50;
         
@@ -75,11 +78,11 @@ public class Bird extends Objects{
     }
 
 
-    public int getX() {
+    public static int getX() {
         return x;
     }
     
-    public int getY() {
+    public static int getY() {
         return y;
     }
     public void setPos(int x,int y){
@@ -89,6 +92,14 @@ public class Bird extends Objects{
     
     public void setVt(float vt){
         this.vt = vt;
+    }
+    
+    public boolean isTurn_left() {
+        return turn_left;
+    }
+
+    public boolean isTurn_right() {
+        return turn_right;
     }
     
     public  void update(long deltaTime){
@@ -112,15 +123,19 @@ public class Bird extends Objects{
 //    }
     public void turnLeft(){
         horizon_left=-5;
+        turn_left=true;
     }
     public void notTurnLeft(){
         horizon_left=0;
+        turn_left=false;
     }
     public void turnRight(){
         horizon_right=5;
+        turn_right=true;
     }
     public void notTurnRight(){
         horizon_right=0;
+        turn_right=false;
     }
     public void turnUp(){
         vertical_up=-5;
