@@ -44,8 +44,8 @@ public class Bullet extends Objects {
 //    }
     
     public void update() {
-          for(int i=0;i<ChimneyGroup.SIZE;i++)
-//                    if(ChimneyGroup.getChimney(i).getRect().intersects(getRect()))
+        if(isAlive==true){
+            for(int i=0;i<ChimneyGroup.SIZE;i++)
                     if (isCollisionHappenWith(ChimneyGroup.getChimney(i).getPosX(), ChimneyGroup.getChimney(i).getPosY(), 50, 50)==true)
                     {
                         ChimneyGroup.getChimney(i).setLive(false);
@@ -72,6 +72,9 @@ public class Bullet extends Objects {
 //        setPos(bird.getX(), bird.getY());
         
 //        rect.setLocation((int)this.getPosX(),(int) this.getPosY());
+//        if (isAlive==false) System.class.
+        }
+          
         
     }
     
@@ -94,5 +97,6 @@ public class Bullet extends Objects {
         g2.setColor(Color.red);
         g2.fillRect((int)getPosX(),(int) getPosY(), 70, 70);
     }
+
 
 }

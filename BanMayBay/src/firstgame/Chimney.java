@@ -40,14 +40,14 @@ public class Chimney extends Objects {
     }
 
     public void update(int traject) {
-        if (getPosY() > 1000 || getPosX() < -50 || getPosX() > 1000) {
+        if (getPosY() > 1500 || getPosX() < -50 || getPosX() > 1000) {
             setLive(false);
         }
-        for (int i = 0; i < GroupBullet.getSize(); i++) {
-            if (getRect().intersects(GroupBullet.getBullet(i).getRect())) {
-                setLive(false);
-            }
-        }
+//        for (int i = 0; i < GroupBullet.getSize(); i++) {
+//            if (getRect().intersects(GroupBullet.getBullet(i).getRect())) {
+//                setLive(false);
+//            }
+//        }
         if(getAlive()==true)
         if (traject == 0) {
             traject1();

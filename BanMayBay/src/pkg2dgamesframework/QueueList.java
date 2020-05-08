@@ -37,6 +37,18 @@ public class QueueList <T> {
         size++;
     }
     
+//    public void remove(int id){
+//        Element e = head;
+//        if(head==null) return;
+//        for(int i=0;i<id;i++){
+//            e=e.next;
+//        }
+//        Element p = e;
+//        e.next = e.next.next;
+//        p.next=null;
+//        p=null;
+//    }
+    
     public T pop(){
         T value = head.value;
         head = head.next;
@@ -56,7 +68,7 @@ public class QueueList <T> {
             e = e.next;
             if(e == null) return null;
         }
-        
+//        return (T) e;
         return e.value;
     }
     
