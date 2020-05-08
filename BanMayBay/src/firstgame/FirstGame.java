@@ -138,9 +138,9 @@ public class FirstGame extends GameScreen{
                 CurrentScreen = BEGIN_SCREEN;
         }
         
-//        if(Event == KEY_PRESSED && e.getKeyCode()==KeyEvent.VK_J){
-//            
-//        }
+        if(Event == KEY_PRESSED && e.getKeyCode()==KeyEvent.VK_J){
+            bulletGroup.fire();  
+        }
         
         
         if(e.getKeyCode() == KeyEvent.VK_A && Event == KEY_PRESSED){

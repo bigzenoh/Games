@@ -26,12 +26,11 @@ public class GroupBullet {
     public static Bullet getBullet(int i) {
         return bullets.get(i);
     }
-    
-    public static int getSize(){
+
+    public static int getSize() {
         return bullets.getSize();
     }
-    
-    
+
     public GroupBullet() {
 
         bullets = new QueueList<Bullet>();
@@ -46,29 +45,15 @@ public class GroupBullet {
     }
 
     public void update() {
-        if(bullets.getSize()<SIZE)
-        if (System.currentTimeMillis() - prevTime >= 200) {
-            Bullet b;
-            b = new Bullet(Bird.getX(), Bird.getY(), 20, 20);
-            bullets.push(b);
-            prevTime = System.currentTimeMillis();
-        }
+
 
         for (int i = 0; i < bullets.getSize() - 1; i++) {
-//            for(int j=0;j<bullets.getSize();j++)
-//                    if(ChimneyGroup.getChimney(i).getRect().intersects(bullets.get(j).getRect())){
-//                        ChimneyGroup.getChimney(i).setLive(false);
-//                        bullets.get(i).setLive(false);
-//                    }
-            
-            if (bullets.get(i).getAlive() == false) {
-                bullets.get(i).setPos(bird.getX(), bird.getY());
-                bullets.get(i).setLive(true);
-            }
+            if (bullets.get(i).getAlive() == true) {
                 
-                        
                 bullets.get(i).update();
-            
+            } else 
+                remove(i);
+
 //            System.out.println(bullets.get(i).getPosY());
         }
 //        System.out.println("================");
@@ -82,24 +67,21 @@ public class GroupBullet {
 
     }
 
-    public void reset() {
+    public void fire() {
         Bullet b;
-        for (int i = 0; i < SIZE / 4; i++) {
+                b = new Bullet(Bird.getX(), Bird.getY(), 20, 20);
+                bullets.push(b);
+    }
 
-            bullets.pop();
-            b = new Bullet(bird.getX(), bird.getY(), 2, 2);
-            bullets.push(b);
-            bullets.pop();
-            b = new Bullet(bird.getX(), bird.getY(), 2, 2);
-            bullets.push(b);
-            bullets.pop();
-            b = new Bullet(bird.getX(), bird.getY(), 2, 2);
-            bullets.push(b);
-            bullets.pop();
-            b = new Bullet(bird.getX(), bird.getY(), 2, 2);
-            bullets.push(b);
+        public void reset() {
+//        bullets = null;
+          for(int i=0;i<bullets.getSize();i++){
+              bullets.pop();
+          }
         }
 
+    private void remove(int i) {
+        bullets.get(i).setPos(-1000, -1000);
     }
 
 }
