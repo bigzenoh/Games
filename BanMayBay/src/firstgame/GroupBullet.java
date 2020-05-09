@@ -18,7 +18,6 @@ import pkg2dgamesframework.QueueList;
 public class GroupBullet {
 
     private static QueueList<Bullet> bullets;
-    long prevTime = System.currentTimeMillis();
     private Bird bird;
 
     public static int SIZE = 30;
@@ -49,6 +48,7 @@ public class GroupBullet {
 
         for (int i = 0; i < bullets.getSize() - 1; i++) {
             if (bullets.get(i).getAlive() == true) {
+                System.out.println("alive "+i);
                 
                 bullets.get(i).update();
             } else 

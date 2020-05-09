@@ -21,37 +21,33 @@ import pkg2dgamesframework.Objects;
  *
  * @author DonQuixote
  */
-public class Bird extends Objects{
-    
+public class Bird extends Objects {
+
     private static int x, y, w, h;
     private BufferedImage birds;
     Animation bird_anim;
-    
-    
+
     private float vt = 0;
-    private float horizon_left = 0, horizon_right =0;
+    private float horizon_left = 0, horizon_right = 0;
     private float vertical_up = 0, vertical_down = 0;
     private boolean turn_left = false, turn_right = false; //de xac dinh huong dan bay
 
-    
-    
     private Rectangle rect;
     private boolean isAlive = true;
-    
-    
-    public Bird(){
-          
+
+    public Bird() {
+
         x = 470;
         y = 800;
         w = 50;
         h = 50;
-        
-        rect = new Rectangle(x,y,50,50);
-        
-        
+
+        rect = new Rectangle(x, y, 50, 50);
+
         try {
             birds = ImageIO.read(new File("Assets/plane.png"));
-        } catch (IOException ex) {} 
+        } catch (IOException ex) {
+        }
         //khoi tao hieu ung chuyen dong cua may bay
         bird_anim = new Animation(70);
         AFrameOnImage f;
@@ -65,35 +61,36 @@ public class Bird extends Objects{
         bird_anim.AddFrame(f);
         //khoi tao may bay
     }
-    
-    public void setLive(boolean b){
+
+    public void setLive(boolean b) {
         isAlive = b;
     }
-    public boolean getAlive(){
+
+    public boolean getAlive() {
         return isAlive;
     }
-    
-    public Rectangle getRect(){
+
+    public Rectangle getRect() {
         return rect;
     }
-
 
     public static int getX() {
         return x;
     }
-    
+
     public static int getY() {
         return y;
     }
-    public void setPos(int x,int y){
-        this.x=x;
-        this.y=y;
+
+    public void setPos(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
-    
-    public void setVt(float vt){
+
+    public void setVt(float vt) {
         this.vt = vt;
     }
-    
+
     public boolean isTurn_left() {
         return turn_left;
     }
@@ -101,69 +98,87 @@ public class Bird extends Objects{
     public boolean isTurn_right() {
         return turn_right;
     }
-    
-    public  void update(long deltaTime){
-        
-        float g = 0.3f; //gia toc  roi
-        
-        if(isAlive) bird_anim.Update_Me(deltaTime);
-        vt+=g;
 
-        
-          if(y>0) y+=vertical_up;
-          if(y<940) y+=vertical_down;
-          if(x>0) x+=horizon_left;
-          if(x<940)x+=horizon_right;
-        if(!isAlive) x-=2;
+    public void update(long deltaTime) {
+
+        float g = 0.3f; //gia toc  roi
+
+        if (isAlive) {
+            bird_anim.Update_Me(deltaTime);
+        }
+        vt += g;
+
+        if (y > 0) {
+            y += vertical_up;
+        }
+        if (y < 940) {
+            y += vertical_down;
+        }
+        if (x > 0) {
+            x += horizon_left;
+        }
+        if (x < 940) {
+            x += horizon_right;
+        }
+        if (!isAlive) {
+            x -= 2;
+        }
         this.rect.setLocation(this.x, this.y);
-    } 
-    
+    }
+
 //    public void fly(){
 //        vt=-5;
 //    }
-    public void turnLeft(){
-        horizon_left=-5;
-        turn_left=true;
-    }
-    public void notTurnLeft(){
-        horizon_left=0;
-        turn_left=false;
-    }
-    public void turnRight(){
-        horizon_right=5;
-        turn_right=true;
-    }
-    public void notTurnRight(){
-        horizon_right=0;
-        turn_right=false;
-    }
-    public void turnUp(){
-        vertical_up=-5;
-    }
-    public void notTurnUp(){
-        vertical_up=0;
-    }
-    public void turnDown(){
-        vertical_down=5;
-    }
-    public void notTurnDown(){
-        vertical_down=0;
+    public void turnLeft() {
+        horizon_left = -5;
+        turn_left = true;
     }
 
-    
+    public void notTurnLeft() {
+        horizon_left = 0;
+        turn_left = false;
+    }
+
+    public void turnRight() {
+        horizon_right = 5;
+        turn_right = true;
+    }
+
+    public void notTurnRight() {
+        horizon_right = 0;
+        turn_right = false;
+    }
+
+    public void turnUp() {
+        vertical_up = -5;
+    }
+
+    public void notTurnUp() {
+        vertical_up = 0;
+    }
+
+    public void turnDown() {
+        vertical_down = 5;
+    }
+
+    public void notTurnDown() {
+        vertical_down = 0;
+    }
+
     @Override
     public float getH() {
-    return h;
+        return h;
     }
-    
-    public void paint(Graphics2D g2){
-        
-        if(horizon_left<0)
+
+    public void paint(Graphics2D g2) {
+
+        if (horizon_left < 0) {
             bird_anim.PaintAnims(x, y, birds, g2, 0, (float) -0.4);
-        else if(horizon_left==0 && horizon_right==0)
+        } else if (horizon_left == 0 && horizon_right == 0) {
             bird_anim.PaintAnims(x, y, birds, g2, 0, 0);
-        else if(horizon_right>0)
-            bird_anim.PaintAnims(x, y, birds, g2, 0, (float)0.4);
+        } else if (horizon_right > 0) {
+            bird_anim.PaintAnims(x, y, birds, g2, 0, (float) 0.4);
+        }
     }
-    
+
 }

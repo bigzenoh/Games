@@ -15,24 +15,20 @@ import pkg2dgamesframework.Objects;
  *
  * @author DonQuixote
  */
-
 public class Bullet extends Objects {
+
     public Bird bird;
-    
-    private boolean isAlive=true;
-    
+
+    private boolean isAlive = true;
+
     private Rectangle rect;
-    
-    
-    
+
     //contructor
     public Bullet(int x, int y, int w, int h) {
         super(x, y, w, h);
-        rect = new Rectangle(x,y,1,1);
+        rect = new Rectangle(x, y, 1, 1);
     }
-    
-    
-    
+
 //    public void traject1(){
 //        setPos(getPosX()+1, getPosY()-6);
 //    }
@@ -42,18 +38,22 @@ public class Bullet extends Objects {
 //    public void traject3(){
 //        setPos(getPosX()-1, getPosY()-6);
 //    }
-    
     public void update() {
-        if(isAlive==true){
-            for(int i=0;i<ChimneyGroup.SIZE;i++)
-                    if (isCollisionHappenWith(ChimneyGroup.getChimney(i).getPosX(), ChimneyGroup.getChimney(i).getPosY(), 50, 50)==true)
-                    {
-                        ChimneyGroup.getChimney(i).setLive(false);
-                        setLive(false);
-                        System.out.println("Ban trung! "+i);
-                    }
-        if(getPosY()<0 ) setLive(false);
-        setPosY(getPosY()-9);
+        if (isAlive == true) {
+            for (int i = 0; i < ChimneyGroup.SIZE; i++) {
+                if (isCollisionHappenWith(ChimneyGroup.getChimney(i).getPosX(), ChimneyGroup.getChimney(i).getPosY(), 30, 30) == true) {
+//                        System.out.println(i);
+//                        GroupBullet.remove(i);
+                    Chimney.setIsBehindBird(true);
+                    ChimneyGroup.getChimney(i).setLive(false);
+                    setLive(false);
+                    System.out.println("Ban trung! " + i);
+                }
+            }
+            if (getPosY() < 0) {
+                setLive(false);
+            }
+            setPosY(getPosY() - 9);
 //        traject2();
 //        System.out.println(getPosY());
 //        switch (trajects) {
@@ -70,33 +70,28 @@ public class Bullet extends Objects {
 //        System.out.println(Bird.getX());
 //        System.out.println(Bird.getY());
 //        setPos(bird.getX(), bird.getY());
-        
+
 //        rect.setLocation((int)this.getPosX(),(int) this.getPosY());
 //        if (isAlive==false) System.class.
         }
-          
-        
+
     }
-    
+
     public boolean getAlive() {
         return isAlive;
     }
-    
-    public void setLive(boolean b){
+
+    public void setLive(boolean b) {
         isAlive = b;
     }
-    
-    public Rectangle getRect(){
+
+    public Rectangle getRect() {
         return rect;
     }
-    
-    
-    
-    
-    public void paint(Graphics2D g2){
-        g2.setColor(Color.red);
-        g2.fillRect((int)getPosX(),(int) getPosY(), 70, 70);
-    }
 
+    public void paint(Graphics2D g2) {
+        g2.setColor(Color.red);
+        g2.fillRect((int) getPosX(), (int) getPosY(), 70, 70);
+    }
 
 }
