@@ -18,11 +18,11 @@ public class Chimney extends Objects {
 
     private Rectangle rect;
 
-    private boolean isBehindBird = false;
+    private static boolean isBehindBird = false;
 
     public Chimney(int x, int y, int w, int h) {
         super(x, y, w, h);
-        rect = new Rectangle(x, y, 50, 50);
+        rect = new Rectangle(x, y, 30, 30);
     }
 
     public void traject1() {
@@ -48,13 +48,14 @@ public class Chimney extends Objects {
 //                setLive(false);
 //            }
 //        }
-        if(getAlive()==true)
-        if (traject == 0) {
-            traject1();
-        } else if (traject == 1) {
-            traject2();
-        } else if (traject == 2) {
-            traject3();
+        if (getAlive() == true) {
+            if (traject == 0) {
+                traject1();
+            } else if (traject == 1) {
+                traject2();
+            } else if (traject == 2) {
+                traject3();
+            }
         }
 
         rect.setLocation((int) this.getPosX(), (int) this.getPosY());
@@ -64,7 +65,7 @@ public class Chimney extends Objects {
         return rect;
     }
 
-    public void setIsBehindBird(boolean b) {
+    public static void setIsBehindBird(boolean b) {
         isBehindBird = b;
     }
 

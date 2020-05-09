@@ -8,158 +8,166 @@ package firstgame;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import pkg2dgamesframework.GameScreen;
 
 /**
  *
  * @author DonQuixote
  */
-public class FirstGame extends GameScreen{
-    
-    
-    
+public class FirstGame extends GameScreen {
+
     private Bird bird;
     private Ground ground;
-    private ChimneyGroup chimneyGroup ;
-    private GroupBullet bulletGroup;
-    
+    private ChimneyGroup chimneyGroup;
+    private BulletGroup bulletGroup;
+
     private int point = 0;
-    
+
     private int BEGIN_SCREEN = 0;
     private int GAMEPPLAY_SCREEN = 1;
     private int GAMEOVER_SCREEN = 2;
-    
+
     private int CurrentScreen = BEGIN_SCREEN;
-    
+
     public FirstGame() {
-        super(1000,1000);
-        
+        super(1000, 1000);
+
         bird = new Bird();
         //xong may bay
         ground = new Ground();
-        
+
         chimneyGroup = new ChimneyGroup();
-        
+
 //        bulletGroup = new Bullet(bird.getX(),bird.getY(),2,2);
-        bulletGroup = new GroupBullet();
-        
+        bulletGroup = new BulletGroup();
+
         BeginGame();
     }
-    
-    
+
     public static void main(String[] args) {
         new FirstGame();
     }
-    
-    private void resetGame(){
-        bird.setPos(470,800);
+
+    private void resetGame() {
+        bird.setPos(470, 800);
         bird.setVt(0);
         bird.setLive(true);
         chimneyGroup.reset();
         point = 0;
     }
-    
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////UPDATE///
     @Override
     public void GAME_UPDATE(long deltaTime) {
-        
-        if(CurrentScreen == BEGIN_SCREEN) {
+
+        if (CurrentScreen == BEGIN_SCREEN) {
             resetGame();
-        } else if(CurrentScreen == GAMEPPLAY_SCREEN) {
+        } else if (CurrentScreen == GAMEPPLAY_SCREEN) {
 
             bird.update(deltaTime);
-            
-            ground.Update();   
+
+            ground.Update();
             bulletGroup.update();
             chimneyGroup.update();
             
-            
-            for(int i=0;i<chimneyGroup.SIZE;i++){
-                
-                if(bird.getRect().intersects(chimneyGroup.getChimney(i).getRect())){
+
+            for (int i = 0; i < chimneyGroup.SIZE; i++) {
+
+                if (bird.getRect().intersects(chimneyGroup.getChimney(i).getRect())) {
                     bird.setLive(false);
                     chimneyGroup.getChimney(i).setLive(false);
                     System.out.println("set Alive False");
                 }
-//                for(int j=0;j<bulletGroup.getSize();j++)
-//                    if(chimneyGroup.getChimney(i).getRect().intersects(bulletGroup.getBullet(j).getRect()))
-//                        chimneyGroup.getChimney(i).setLive(false);
-                
-                    
+
             }
-            
-            
-            for(int i=0;i<chimneyGroup.SIZE;i++){
-                if(chimneyGroup.getChimney(i).getIsBehindBird()==true){
+
+            for (int i = 0; i < chimneyGroup.SIZE; i++) {
+                if (chimneyGroup.getChimney(i).getIsBehindBird() == true) {
                     point++;
                     chimneyGroup.getChimney(i).setIsBehindBird(false);
-                    
+
+                }
             }
-            }
-            
-            if(bird.getAlive() == false)
+
+            if (bird.getAlive() == false) {
                 CurrentScreen = GAMEOVER_SCREEN;
+            }
         }
-        
+
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////PAINT//
+
     @Override
     public void GAME_PAINT(Graphics2D g2) {
-        
+
         ground.Paint(g2);
         chimneyGroup.paint(g2);
-        bird.paint(g2);   
+        bird.paint(g2);
         bulletGroup.paint(g2);
-        
-        if(CurrentScreen == BEGIN_SCREEN) {
+
+        if (CurrentScreen == BEGIN_SCREEN) {
             g2.setColor(Color.red);
             g2.drawString("Press space to play this fucking game!", 200, 300);
+            g2.drawString("Press J to fire, and dont die, noob!", 200, 350);
         }
-        if(CurrentScreen == GAMEOVER_SCREEN){
+        if (CurrentScreen == GAMEOVER_SCREEN) {
             g2.setColor(Color.red);
             g2.drawString("Ngu loz!", 200, 300);
         }
         g2.setColor(Color.red);
-        g2.drawString("Điểm: "+point, 20, 30);
-    
-    }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////KEY_EVENT///
-    
-    @Override
-    public void KEY_ACTION(KeyEvent e, int Event) {
-        if(Event == KEY_PRESSED && e.getKeyCode()==KeyEvent.VK_SPACE){
-//            
-            if(CurrentScreen == BEGIN_SCREEN){
-                CurrentScreen = GAMEPPLAY_SCREEN;
-                
-            } else if(CurrentScreen == GAMEOVER_SCREEN)
-                CurrentScreen = BEGIN_SCREEN;
-        }
-        
-        if(Event == KEY_PRESSED && e.getKeyCode()==KeyEvent.VK_J){
-            bulletGroup.fire();  
-        }
-        
-        
-        if(e.getKeyCode() == KeyEvent.VK_A && Event == KEY_PRESSED){
-                if(bird.getAlive()) bird.turnLeft();
-        } else if(e.getKeyCode() == KeyEvent.VK_A && Event == KEY_RELEASED) bird.notTurnLeft();
-        
-        if(e.getKeyCode() == KeyEvent.VK_D && Event == KEY_PRESSED){
-            if(bird.getAlive()) bird.turnRight();
-        } else if(e.getKeyCode() == KeyEvent.VK_D && Event == KEY_RELEASED) bird.notTurnRight();
-        
-        if(e.getKeyCode() == KeyEvent.VK_W && Event == KEY_PRESSED){
-            if(bird.getAlive()) bird.turnUp();
-        } else if(e.getKeyCode() == KeyEvent.VK_W && Event == KEY_RELEASED) bird.notTurnUp();
-        
-        if(e.getKeyCode() == KeyEvent.VK_S && Event == KEY_PRESSED){
-            if(bird.getAlive()) bird.turnDown();
-        } else if(e.getKeyCode() == KeyEvent.VK_S && Event == KEY_RELEASED) bird.notTurnDown();
-        
+        g2.drawString("Điểm: " + point, 20, 30);
 
     }
-    
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////KEY_EVENT///
+
+    @Override
+    public void KEY_ACTION(KeyEvent e, int Event) {
+        if (Event == KEY_PRESSED && e.getKeyCode() == KeyEvent.VK_SPACE) {
+//            
+            if (CurrentScreen == BEGIN_SCREEN) {
+                CurrentScreen = GAMEPPLAY_SCREEN;
+
+            } else if (CurrentScreen == GAMEOVER_SCREEN) {
+                CurrentScreen = BEGIN_SCREEN;
+            }
+        }
+
+        if (Event == KEY_PRESSED && e.getKeyCode() == KeyEvent.VK_J) {
+            bulletGroup.fire();
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_A && Event == KEY_PRESSED) {
+            if (bird.getAlive()) {
+                bird.turnLeft();
+            }
+        } else if (e.getKeyCode() == KeyEvent.VK_A && Event == KEY_RELEASED) {
+            bird.notTurnLeft();
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_D && Event == KEY_PRESSED) {
+            if (bird.getAlive()) {
+                bird.turnRight();
+            }
+        } else if (e.getKeyCode() == KeyEvent.VK_D && Event == KEY_RELEASED) {
+            bird.notTurnRight();
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_W && Event == KEY_PRESSED) {
+            if (bird.getAlive()) {
+                bird.turnUp();
+            }
+        } else if (e.getKeyCode() == KeyEvent.VK_W && Event == KEY_RELEASED) {
+            bird.notTurnUp();
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_S && Event == KEY_PRESSED) {
+            if (bird.getAlive()) {
+                bird.turnDown();
+            }
+        } else if (e.getKeyCode() == KeyEvent.VK_S && Event == KEY_RELEASED) {
+            bird.notTurnDown();
+        }
+
+    }
+
 }

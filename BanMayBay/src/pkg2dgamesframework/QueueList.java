@@ -37,17 +37,19 @@ public class QueueList <T> {
         size++;
     }
     
-//    public void remove(int id){
-//        Element e = head;
-//        if(head==null) return;
-//        for(int i=0;i<id;i++){
-//            e=e.next;
-//        }
-//        Element p = e;
-//        e.next = e.next.next;
-//        p.next=null;
-//        p=null;
-//    }
+    public void remove(int id){
+        Element e = head;
+        if(head==null) return;
+    
+        for(int i=0;i<id;i++){
+            e=e.next;
+        }
+        Element p = e;
+        e.next = e.next.next;
+        p.next=null;
+        p=null;
+        size--;
+    }
     
     public T pop(){
         T value = head.value;
