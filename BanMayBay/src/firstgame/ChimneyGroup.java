@@ -23,7 +23,7 @@ public class ChimneyGroup {
 
     private static QueueList<Chimney> chimneys;
 
-    private BufferedImage chimneyImage, chimneyImage2;
+    private BufferedImage chimneyImage;
 
     public static int SIZE = 60;
 
@@ -39,7 +39,6 @@ public class ChimneyGroup {
 
         try {
             chimneyImage = ImageIO.read(new File("Assets/enemyplane.png"));
-            chimneyImage2 = ImageIO.read(new File("Assets/chimney2.png"));
         } catch (IOException ex) {
         }
 
@@ -69,7 +68,6 @@ public class ChimneyGroup {
                 chimneys.get(i).setPosX(generator.nextInt(1000));
                 chimneys.get(i).setPosY(generator.nextInt(1000) - 1000);
                 chimneys.get(i).setLive(true);
-//            chimneys.get(i).setIsBehindBird(true);
 
             }
         }

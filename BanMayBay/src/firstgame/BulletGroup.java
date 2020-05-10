@@ -7,7 +7,11 @@ package firstgame;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -15,56 +19,54 @@ import java.util.ArrayList;
  */
 public class BulletGroup {
 
-//    int SIZE = 0, deadSIZE = 0;
+    private BufferedImage bulletImage;
+
     ArrayList<Bullet> bullets;
     ArrayList<Bullet> deadBullets;
 
     public BulletGroup() {
 
+        try {
+            bulletImage = ImageIO.read(new File("Assets/1bullet.png"));
+        } catch (IOException ex) {
+        }
+
         bullets = new ArrayList<Bullet>();
         deadBullets = new ArrayList<>();
-//        Bullet b;
-//        b = new Bullet(Bird.getX(), Bird.getY(), 20, 20);
-        bullets.add(null);
-        deadBullets.add(null);
-//        SIZE++;
 
     }
 
     public void update() {
+        if (bullets.size() > 0) {
+            for (int i = 0; i < bullets.size(); i++) {
+                if (bullets.get(i).getAlive() == true) {
+                    System.out.println("alive " + i);
+                    bullets.get(i).update();
 
-        for (int i = 0; i <bullets.size()-1; i++) {
-            if (bullets.get(i).getAlive() == true) {
-                System.out.println("alive " + i);
-                bullets.get(i).update();
+                } else {
+                    deadBullets.add(bullets.get(i));
+                }
 
-            } else {
-                deadBullets.add(bullets.get(i));
-//                deadSIZE++;
             }
-
-//            System.out.println(bullets.get(i).getPosY());
+            bullets.removeAll(deadBullets);
+            deadBullets.clear();
         }
-        bullets.removeAll(deadBullets);
-//        SIZE -= deadSIZE;
-//        deadSIZE = 0;
-        deadBullets.clear();
-//        System.out.println("================");
+
     }
 
     public void paint(Graphics2D g2) {
-        for (int i = 0; i < bullets.size(); i++) {
-            g2.setColor(Color.red);
-            g2.fillRect((int) bullets.get(i).getPosX(), (int) bullets.get(i).getPosY(), 20, 20);
+        if (bullets.size() > 0) {
+            for (int i = 0; i < bullets.size(); i++) {
+                g2.drawImage(bulletImage, (int) bullets.get(i).getPosX(), (int) bullets.get(i).getPosY(), null);
+            }
         }
 
     }
 
     public void fire() {
         Bullet b;
-        b = new Bullet(Bird.getX(), Bird.getY(), 20, 20);
+        b = new Bullet(Bird.getX() + 27, Bird.getY(), 20, 20);
         bullets.add(b);
-//        SIZE++;
     }
 
     public void reset() {

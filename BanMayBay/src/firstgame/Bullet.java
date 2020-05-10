@@ -26,24 +26,12 @@ public class Bullet extends Objects {
     //contructor
     public Bullet(int x, int y, int w, int h) {
         super(x, y, w, h);
-        rect = new Rectangle(x, y, 1, 1);
     }
 
-//    public void traject1(){
-//        setPos(getPosX()+1, getPosY()-6);
-//    }
-//    public void traject2(){
-//        setPosY(getPosY()-2);
-//    }
-//    public void traject3(){
-//        setPos(getPosX()-1, getPosY()-6);
-//    }
     public void update() {
         if (isAlive == true) {
             for (int i = 0; i < ChimneyGroup.SIZE; i++) {
-                if (isCollisionHappenWith(ChimneyGroup.getChimney(i).getPosX(), ChimneyGroup.getChimney(i).getPosY(), 30, 30) == true) {
-//                        System.out.println(i);
-//                        GroupBullet.remove(i);
+                if (isCollisionHappenWith(ChimneyGroup.getChimney(i).getPosX(), ChimneyGroup.getChimney(i).getPosY(), 50, 50) == true) {
                     Chimney.setIsBehindBird(true);
                     ChimneyGroup.getChimney(i).setLive(false);
                     setLive(false);
@@ -54,25 +42,6 @@ public class Bullet extends Objects {
                 setLive(false);
             }
             setPosY(getPosY() - 9);
-//        traject2();
-//        System.out.println(getPosY());
-//        switch (trajects) {
-//            case 0:
-//                traject1();
-//                break;
-//            case 1:
-//                traject2();
-//                break;
-//            case 2:
-//                traject3();
-//                break;
-//        }
-//        System.out.println(Bird.getX());
-//        System.out.println(Bird.getY());
-//        setPos(bird.getX(), bird.getY());
-
-//        rect.setLocation((int)this.getPosX(),(int) this.getPosY());
-//        if (isAlive==false) System.class.
         }
 
     }
