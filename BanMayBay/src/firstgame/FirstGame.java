@@ -53,6 +53,7 @@ public class FirstGame extends GameScreen {
         bird.setVt(0);
         bird.setLive(true);
         chimneyGroup.reset();
+        bulletGroup.reset();
         point = 0;
     }
 
@@ -67,9 +68,10 @@ public class FirstGame extends GameScreen {
             bird.update(deltaTime);
 
             ground.Update();
+
             bulletGroup.update();
+
             chimneyGroup.update();
-            
 
             for (int i = 0; i < chimneyGroup.SIZE; i++) {
 
@@ -101,8 +103,10 @@ public class FirstGame extends GameScreen {
     public void GAME_PAINT(Graphics2D g2) {
 
         ground.Paint(g2);
+
         chimneyGroup.paint(g2);
         bird.paint(g2);
+
         bulletGroup.paint(g2);
 
         if (CurrentScreen == BEGIN_SCREEN) {
