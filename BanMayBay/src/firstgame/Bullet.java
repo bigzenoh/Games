@@ -35,7 +35,7 @@ public class Bullet extends Objects {
                     Chimney.setIsBehindBird(true);
                     ChimneyGroup.getChimney(i).setLive(false);
                     setLive(false);
-                    System.out.println("Ban trung! " + i);
+//                    System.out.println("Ban trung! " + i);
                 }
             }
             if (getPosY() < 0) {

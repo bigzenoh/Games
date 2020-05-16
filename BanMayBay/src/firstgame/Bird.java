@@ -27,7 +27,7 @@ public class Bird extends Objects {
     private BufferedImage birds;
     Animation bird_anim;
 
-    private float vt = 0;
+    
     private float horizon_left = 0, horizon_right = 0;
     private float vertical_up = 0, vertical_down = 0;
     private boolean turn_left = false, turn_right = false; //de xac dinh huong dan bay
@@ -87,9 +87,6 @@ public class Bird extends Objects {
         this.y = y;
     }
 
-    public void setVt(float vt) {
-        this.vt = vt;
-    }
 
     public boolean isTurn_left() {
         return turn_left;
@@ -101,12 +98,9 @@ public class Bird extends Objects {
 
     public void update(long deltaTime) {
 
-        float g = 0.3f; //gia toc  roi
-
         if (isAlive) {
-            bird_anim.Update_Me(deltaTime);
+            bird_anim.Update_Me (deltaTime);
         }
-        vt += g;
 
         if (y > 0) {
             y += vertical_up;

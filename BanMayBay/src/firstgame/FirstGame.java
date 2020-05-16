@@ -50,7 +50,6 @@ public class FirstGame extends GameScreen {
 
     private void resetGame() {
         bird.setPos(470, 800);
-        bird.setVt(0);
         bird.setLive(true);
         chimneyGroup.reset();
         bulletGroup.reset();

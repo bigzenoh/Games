@@ -23,7 +23,7 @@ public class GameThread extends JPanel implements Runnable{
     
     private Graphics ThisGraphics;
     
-    public static int FPS = 70;
+    public static int FPS = 60;
     
     private BufferedImage buffImage;
     

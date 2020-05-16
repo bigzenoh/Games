@@ -40,7 +40,7 @@ public class BulletGroup {
         if (bullets.size() > 0) {
             for (int i = 0; i < bullets.size(); i++) {
                 if (bullets.get(i).getAlive() == true) {
-                    System.out.println("alive " + i);
+//                    System.out.println("alive " + i);
                     bullets.get(i).update();
 
                 } else {
